@@ -1,0 +1,153 @@
+<!-- views/partials/header.ejs -->
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
+  <a class="navbar-brand" href="#">Flowers</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+
+      <% if (user != "null") { %>
+        <% switch (user.type) {
+          case 'manager' : %>
+                  <li class="nav-item forManager">
+                    <a class="nav-link" href="#branches" id="Branch">Branch Management</a>
+                  </li>
+                  <% 
+
+          case 'employee' : %>
+                  <li class="nav-item forWorker forManager">
+                    <a class="nav-link" href="#users" id="User">User Management</a>
+                  </li>        
+                  <% 
+
+          case 'customer' : %>
+                   <li class="nav-item forCustomer forWorker forManager">
+                    <a class="nav-link" href="#catalog" id="Catalog">Catalog</a>
+                   </li>
+                  <% break;
+
+          } %>
+        <!--<% if(user.type == "customer") { %>
+          <% if(user.type == "employee") { %>
+            <% if(user.type == "manager") { %>
+              <li class="nav-item forManager">
+                  <a class="nav-link" href="#branches" id="Branch">Branch Management</a>
+                </li>
+            <% } %>        
+          <li class="nav-item forWorker forManager">
+            <a class="nav-link" href="#users" id="User">User Management</a>
+          </li>
+          <% } %>
+        <li class="nav-item forCustomer forWorker forManager">
+          <a class="nav-link" href="#catalog" id="Catalog">Catalog</a>
+        </li>
+        <% } %>
+      <% } %> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#about-us" id="About-us">About the Company</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#contact-us" id="Contact-us">Contact Us</a>
+      </li>
+
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+
+    </ul>
+
+    <% if(user == "null") { %>
+       <a href="/login" class="btn btn-outline-primary" id="a-modal">Login</a>
+    <% } else{ %>  
+       <a href="#" class="btn btn-outline-primary" id="logoutButton">Logout</a>
+    <% } %>
+
+    <!-- <a class="btn btn-outline-primary" id="a-modal">Login</a> -->
+    <!-- <a href="#myModal" class="btn btn-outline-primary" data-toggle="modal">LOGIN</a> -->
+    <!-- <a class="btn btn-outline-primary" data-toggle="modal" href="../login.ejs" data-target="#myModal">Login</a> -->
+    <!-- <a data-toggle="modal" href="../login.ejs" data-target="#myModal">Click me</a> -->
+
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Log In</button> -->
+    <!-- <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+
+
+<!-- The Modal -->
+<!-- text-center -->
+<div class="modal fade text-center" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content w-75 mx-auto">
+
+      <!-- login.ejs -->
+
+    </div>
+  </div>
+</div>
+
+<!-- <script src="../../js/jquery_functions.js"></script> -->
+
+<script>
+
+
+
+  $('#a-modal').on('click', function (e) {
+    e.preventDefault();
+    $('#myModal').modal('show').find('.modal-content').load($(this).attr('href'));    
+  });
+
+  $('#logoutButton').on('click', function (e){
+    e.preventDefault();
+    console.log("logout Button");
+    history.pushState(null, null, "http://localhost:8080");
+    location.reload(true);
+
+  });
+
+  $(document).ready(function () {
+    console.log("load ready page");
+    $('#middle-page-container').load('/about-us');
+  });
+
+  $('#Contact-us').click(function () {
+    console.log("load contact us page");    
+    $('#middle-page-container').load('/contact-us');
+  });
+
+  $('#User').click(function () {
+    console.log("load users page");    
+    $('#middle-page-container').load('/users');
+  });
+
+  $('#Catalog').click(function () {
+    console.log("load catalog page");    
+    $('#middle-page-container').load('/catalog');
+  });
+
+  $('#Branch').click(function () {
+    console.log("load branches page");    
+    $('#middle-page-container').load('/branches');
+  });
+
+  $('#About-us').click(function () {
+    console.log("load about us page");    
+    $('#middle-page-container').load('/about-us');
+  });
+
+</script>

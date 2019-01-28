@@ -1,0 +1,139 @@
+
+      <!-- Modal Header -->
+<!-- <div class="modal-header">
+    <h4 class="modal-title">Login</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div> -->
+  
+  <!-- Modal body -->
+  <div class="modal-body">
+      <div>
+        <form class="form-signin" id="form-signin">
+            <!-- <img class="mb-4" src="./Signin Template for Bootstrap_files/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="inputEmail" class="sr-only ">Email address</label>
+            <!-- class="form-control" -->
+            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <!-- class="form-control" -->
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+            <!-- <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div> -->
+            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+            <!-- <p class="mt-5 mb-3 text-muted">© 2017-2018</p> -->
+          </form>
+        </div>
+    </div>
+    
+    <!-- Modal footer -->
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div> -->
+
+
+<script>
+
+$(function () {
+    $('#form-signin').on('submit', function (e) {
+      console.log("submitting login");
+      // var message = {
+      //           email: document.getElementById("inputEmail").innerText(),
+      //           password: document.getElementById("inputPassword").innerText()
+      //         };
+      // var data = new FormData();
+      // data.append( "json", JSON.stringify( message ) );
+      var mail = document.getElementById("inputEmail").value;
+      var pass = document.getElementById("inputPassword").value;
+      e.preventDefault();
+      fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+                "Content-Type": "application/json"
+            },
+        body: JSON.stringify(
+          {
+                email: mail,
+                password: pass
+              }
+        )
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function(res){
+          if(res.indexOf("Failure") == -1){ //did not find "failure" in the res
+            console.log("LEGAL");
+            // let user = res.user;
+            // console.log(res);
+            let user = JSON.parse(res);
+            console.log(user);
+            let name = user.name;
+            let type = user.type;    
+            console.log(type);                    
+            
+            history.pushState(null, null, "user/" + name + "/");
+            location.reload(true);
+
+
+            // var elements;
+
+            // switch (type) {
+            //   case "manager":
+            //     elements = document.getElementsByClassName("forManager");//$("#forManager");
+            //     break;
+            //     case "employee":
+            //     elements = document.getElementsByClassName("forWorker");//$("#forWorker");
+            //     break;
+            //     case "customer":
+            //     elements = document.getElementsByClassName("forCustomer");//$("#forCustomer");
+            //     break;
+            
+            //   default:
+            //     break;
+            // }
+            // //var elements = document.getElementsByClassName("forRegistered");
+            // for (var i = 0; i < elements.length; i++) {
+            //   elements[i].style.visibility = "visible";
+            //   elements[i].style.display = "inline";
+            // }
+            $('#myModal').modal('toggle');       
+          }
+          else
+           console.log("Wrong name!!");
+        })
+        .catch(function (error) {
+          console.log('Request failure: ', error);
+        });
+
+      // $.ajax({
+      //   url: 'http://localhost:8080/login', //this is the submit URL
+      //   type: 'POST', //or POST
+      //   data: $('#form-signin').serialize(),
+      //   dataType: "json",
+      //   success: function (result, status, xhr) {
+      //     if (result.d == "Success") {
+      //       alert('successfully submitted');
+      //       console.log("IF");
+      //       alert(data);
+      //     }
+      //     else{
+      //       alert('Login failed');
+      //       console.log("ELSE");
+      //       alert(data);
+      //     }
+
+      //   },
+      //   error: function (xhr, status, error) {
+      //     // $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+      //     console.log("ERROR");
+      //     alert(this.data);
+      //   }
+      // });
+
+    });
+  });
+
+</script>

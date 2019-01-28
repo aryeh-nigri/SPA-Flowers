@@ -1,0 +1,25 @@
+{
+    "branches":
+    [
+        {
+            "isActive":"true",
+            "address":"Jerusalem",
+            "id":123
+        },
+        {
+            "isActive":"true",
+            "address":"Tel Aviv",
+            "id":456
+        },
+        {
+            "isActive":"false",
+            "address":"Haifa",
+            "id":789
+        },
+        {
+            "isActive":"false",
+            "address":"Elat",
+            "id":1011
+        }
+    ]
+}

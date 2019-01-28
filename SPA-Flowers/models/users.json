@@ -1,0 +1,47 @@
+{
+    "users":
+    [
+        {
+            "type":"manager",
+            "name":"Admin",
+            "password":"admin",
+            "email":"admin@admin.com",
+            "address":"Street manager 123",
+            "id":1
+        },
+        {
+            "type":"employee",
+            "name":"Moshe",
+            "password":"mosh123",
+            "email":"moshe@uol.com",
+            "address":"Street Moshe 123",
+            "id":2,
+            "branchId":123
+        },
+        {
+            "type":"employee",
+            "name":"Dani",
+            "password":"dan123",
+            "email":"Dani@gmail.com",
+            "address":"Street Dani 123",
+            "id":3,
+            "branchId":456
+        },
+        {
+            "type":"customer",
+            "name":"Avi",
+            "password":"avi123",
+            "email":"avi@hotmail.com",
+            "address":"Street Avi 123",
+            "id":4
+        },
+        {
+            "type":"customer",
+            "name":"Rafa",
+            "password":"rafa123",
+            "email":"rafa@outlook.com",
+            "address":"Street Rafa 123",
+            "id":5
+        }
+    ]    
+}
