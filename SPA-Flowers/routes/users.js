@@ -8,4 +8,10 @@ router.get('/', function (req, res) {
   res.render('partials/users', {users: users} );
 });
 
+router.post('/', function (req, res) {
+  
+  // let users = JSON.parse(fs.readFileSync('./database/users.json', 'utf-8'));
+  res.render('partials/users', {users: users} );
+});
+
 module.exports = router;

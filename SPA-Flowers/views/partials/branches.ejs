@@ -1,9 +1,30 @@
 <ul>
-    <% branches.branches.forEach(function(branch){ %>
-        <li><%= branch.address %> - <%= branch.id %></li>
+    <% branches.forEach(function(branch){ %>
+    <li>
+        <%= branch.adress %> -
+        <%= branch.id %>
+    </li>
     <% }); %>
 </ul>
+<div class="formWrapper">
+    <form action="http://localhost:8080/branches" method="post" class="myForm">
+        <div>
+            <!-- Title -->
+            <div class="title">
+                <h2>Add New Branch</h2>
+            </div>
+            <input required type="text" name="address" id="address" placeholder="Address">
+            <input required type="number" name="ID" id="ID" placeholder="ID">
+            <input type="checkbox" name="isActive" id="isActive" value="isActive"> isActive <br>
 
+            <!-- SUBMIT -->
+            <div class="submit">
+                <input type="submit" value="Submit">
+            </div>
+
+        </div>
+    </form>
+</div>
 <!-- "isActive":"true",
 "address":"Jerusalem",
 "id":123 -->
