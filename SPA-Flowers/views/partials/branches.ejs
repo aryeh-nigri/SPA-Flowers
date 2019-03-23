@@ -7,7 +7,7 @@
     <% }); %>
 </ul>
 <div class="formWrapper">
-    <form action="http://localhost:8080/branches" method="post" class="myForm">
+    <form id="myForm" class="myForm">
         <div>
             <!-- Title -->
             <div class="title">
@@ -28,3 +28,33 @@
 <!-- "isActive":"true",
 "address":"Jerusalem",
 "id":123 -->
+<script>
+$(function () {
+    $('#myForm').on('submit', function (e) {
+      console.log("submitting login");
+      var address = document.getElementById("address").value;
+      var id = document.getElementById("ID").value;
+      var isActive = document.getElementById("isActive").value;
+      e.preventDefault();
+      fetch('http://localhost:8080/branches', {
+        method: 'POST',
+        headers: {
+                "Content-Type": "application/json"
+            },
+        body: JSON.stringify(
+          {
+                address: address,
+                id: id,
+                isActive: isActive
+              }
+        )
+      })
+        .then(function (res) {
+            console.log(res);
+            alert("list updated!");
+            $('#middle-page-container').load('/branches');
+        });
+    });
+  });
+
+</script>
