@@ -5,7 +5,7 @@ let db = mongo.createConnection();
      try {
        console.log("estou na criacao do DB");
        
-      await db.openUri('mongodb://localhost/flowers-shop-db');	
+      await db.openUri('mongodb+srv://zeev_noiman:Projetofinal10@machonlevproject-qb49v.mongodb.net/flowers-shop?retryWrites=true');	
     } catch (err) {	
         debug("Error connecting to DB: " + err);	
       }	

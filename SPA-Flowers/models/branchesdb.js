@@ -9,7 +9,7 @@ const mongo = require("mongoose");
 module.exports = db => {
     let schema = new mongo.Schema({
         isActive: Boolean,
-        adress: {
+        address: {
             type: String,
             required: true
         },
@@ -26,7 +26,7 @@ module.exports = db => {
     schema.statics.CREATE = async function (branch) {
         return this.create({
             isActive: branch[0],
-            adress: branch[1],
+            address: branch[1],
             id: branch[2],
         });
     }
