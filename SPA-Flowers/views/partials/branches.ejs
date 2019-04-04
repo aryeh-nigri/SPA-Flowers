@@ -1,11 +1,18 @@
 <ul>
     <% branches.forEach(function(branch){ %>
-    <li>
-        <%= branch.address %> -
-        <%= branch.id %>
-    </li>
+        <li>
+            <%= branch.address %>
+        </li>
+        <% if(branch.isActive) { %>
+            <input name='selectAll' type='checkbox' onclick="return false;" checked="checked" />
+            <label>Is Active</label>
+        <% } else { %>  
+            <input name='selectAll' type='checkbox' onclick="return false;" />
+            <label>Is NOT Active</label>
+        <% } %>  
     <% }); %>
 </ul>
+
 <div class="formWrapper">
     <form id="myForm" class="myForm">
         <div>
@@ -14,7 +21,6 @@
                 <h2>Add New Branch</h2>
             </div>
             <input required type="text" name="address" id="address" placeholder="Address">
-            <input required type="number" name="ID" id="ID" placeholder="ID">
             <input type="checkbox" name="isActive" id="isActive" value="isActive"> isActive <br>
 
             <!-- SUBMIT -->
@@ -25,17 +31,17 @@
         </div>
     </form>
 </div>
-<!-- "isActive":"true",
-"address":"Jerusalem",
-"id":123 -->
+
 <script>
 $(function () {
     $('#myForm').on('submit', function (e) {
+      e.preventDefault();
       console.log("submitting login");
       var address = document.getElementById("address").value;
-      var id = document.getElementById("ID").value;
-      var isActive = document.getElementById("isActive").value;
-      e.preventDefault();
+      var isActive = false;
+      if($("#isActive").is(':checked')){
+          isActive = true;
+      }
       fetch('http://localhost:8080/branches', {
         method: 'POST',
         headers: {
@@ -43,10 +49,9 @@ $(function () {
             },
         body: JSON.stringify(
           {
-                address: address,
-                id: id,
-                isActive: isActive
-              }
+                address,
+                isActive
+          }
         )
       })
         .then(function (res) {

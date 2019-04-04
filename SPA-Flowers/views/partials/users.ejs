@@ -1,13 +1,58 @@
 <ul>
-    <% users.users.forEach(function(user){ %>
-        <li><%= user.name %> - <%= user.type %></li>
+    <% users.forEach(function(user){ %>
+        <li><%= user.name %> - <%= user.securityLevel %></li>
     <% }); %>
 </ul>
 
-<!-- "type":"employee",
-"name":"Moshe",
-"password":"mosh123",
-"email":"moshe@uol.com",
-"address":"Street Moshe 123",
-"id":2,
-"branchId":123 -->
+<div class="formWrapper">
+    <form id="myForm" class="myForm">
+        <div>
+            <!-- Title -->
+            <div class="title">
+                <h2>Add New User</h2>
+            </div>
+            <input required type="text" name="name" id="name" placeholder="Name">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input required type="email" name="email" id="email" placeholder="Email">
+            <input required type="text" name="address" id="address" placeholder="Address">
+            <input required type="text" name="level" id="level" placeholder="Security Level">
+
+            <!-- SUBMIT -->
+            <div class="submit">
+                <input type="submit" value="Submit">
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script>
+$(function () {
+    $('#myForm').on('submit', function (e) {
+      e.preventDefault();
+      console.log("submitting login");
+      var name = document.getElementById("name").value;
+      var password = document.getElementById("password").value;
+      var email = document.getElementById("email").value;
+      var address = document.getElementById("address").value;
+      var level = document.getElementById("level").value;
+      fetch('http://localhost:8080/users', {
+        method: 'POST',
+        headers: {
+                "Content-Type": "application/json"
+            },
+        body: JSON.stringify(
+          {
+              name,password,email,address,securityLevel:level
+          }
+        )
+      })
+        .then(function (res) {
+            console.log(res);
+            alert("list updated!");
+            $('#middle-page-container').load('/users');
+        });
+    });
+  });
+
+</script>
